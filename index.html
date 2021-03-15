@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./pages/index.css">
+    <title>Mesto</title>
+</head>
+
+<body class="page">
+    <div class="page-container">
+        <header class="header">
+            <a class="header__logo"><img src="./images/logo_w.svg" alt="Логотип портала Место"></a>
+        </header>
+        <main>
+            <section class="profile">
+                <div class="profile__info">
+                    <img class="profile__info-img" src="./images/kusto.png" alt="Фотография пользователя">
+                    <div class="profile__info-text">
+                        <h1 class="profile__title">Жак Ив Кусто</h1>
+                        <button class="profile__info-text-button popup_opened"></button>
+                        <p class="profile__subtitle">Исследователь океана</p>
+                    </div>
+                </div>
+                <button class="profile__button"></button>
+            </section>
+            <section class="cards">
+                <article class="cards__item">
+                    <img class="cards__item-img" src="./images/castle.png" alt="Изображение замка на горе">
+                    <div class="cards__item-title">
+                        <h2 class="cards__item-title-h">Карачаевск</h2>
+                        <button class="cards__item-title-btn"></button>
+                    </div>
+                </article>
+                <article class="cards__item">
+                    <img class="cards__item-img" src="./images/sundown.png" alt="Изображение вершины горы на закате">
+                    <div class="cards__item-title">
+                        <h2 class="cards__item-title-h">Гора Эльбрус</h2>
+                        <button class="cards__item-title-btn cards__item-title-btn_liked"></button>
+                    </div>
+                </article>
+                <article class="cards__item">
+                    <img class="cards__item-img" src="./images/mountains.png" alt="Изображение гор">
+                    <div class="cards__item-title">
+                        <h2 class="cards__item-title-h">Домбай</h2>
+                        <button class="cards__item-title-btn"></button>
+                    </div>
+                </article>
+                <article class="cards__item">
+                    <img class="cards__item-img" src="./images/sundown.png" alt="Изображение вершины горы на закате">
+                    <div class="cards__item-title">
+                        <h2 class="cards__item-title-h">Гора Эльбрус</h2>
+                        <button class="cards__item-title-btn"></button>
+                    </div>
+                </article>
+                <article class="cards__item">
+                    <img class="cards__item-img" src="./images/mountains.png" alt="Изображение гор">
+                    <div class="cards__item-title">
+                        <h2 class="cards__item-title-h">Домбай</h2>
+                        <button class="cards__item-title-btn"></button>
+                    </div>
+                </article>
+                <article class="cards__item">
+                    <img class="cards__item-img" src="./images/castle.png" alt="Изображение замка на горе">
+                    <div class="cards__item-title">
+                        <h2 class="cards__item-title-h">Карачаево-Черкессия</h2>
+                        <button class="cards__item-title-btn"></button>
+                    </div>
+                </article>
+            </section>
+        </main>
+        <footer class="footer">
+            <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+        </footer>
+    </div>
+    <div class="popup">
+        <div class="popup__overlay"></div>
+        <div class="popup__container">
+            <button class="popup_close" type="button" title="Закрыть окно"></button>
+            <form action="action" class="popup__form">
+                <fieldset class="popup__field">
+                    <legend class="popup__header">Редактировать профиль</legend>
+                    <section class="popup__section">
+                        <input class="popup__input popup__input_name" type="text" value="" placeholder="Имя пользователя">
+                    </section>
+                    <section class="popup__section">
+                        <input class="popup__input popup__input_caption" type="text" value="" placeholder="Профессия">
+                    </section>
+                    <button class="popup__btn" type="submit">Сохранить</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <script src="./pages/index.js"></script>
+</body>
+
+</html>
