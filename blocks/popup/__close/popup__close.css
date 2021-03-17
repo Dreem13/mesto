@@ -2,10 +2,10 @@
   position: absolute;
   top: -40px;
   right: -40px;
-  background-image: url(../../../images/close_icon.png);
+  background-image: url(../../../images/close_icon.svg);
   width: 40px;
   height: 40px;
-  background-color: black;
+  background-color: transparent;
   cursor: pointer;
   border: none;
   background-position: 50%;
