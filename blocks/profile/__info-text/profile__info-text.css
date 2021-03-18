@@ -1,12 +1,7 @@
 .profile__info-text {
-  color: white;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  }
-
-  @media screen and (max-width: 580px) {
-    .profile__info-text {
-      justify-content: center;
-    }
-  }
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto;
+    align-items: center;
+    color: white;
+}
