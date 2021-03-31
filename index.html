@@ -23,61 +23,21 @@
                         <button class="profile__info-text-button" type="button" aria-label="Изменение данных пользователя"></button>
                     </div>
                 </div>
-                <button class="profile__button" type="button" aria-label="save user profile"></button>
+                <button class="profile__button" type="button" aria-label="Добавление новой карточки"></button>
             </section>
-            <section class="cards">
-                <article class="cards__item">
-                    <img class="cards__item-img" src="./images/castle.png" alt="Изображение замка на горе">
-                    <div class="cards__item-title">
-                        <h2 class="cards__item-title-h">Карачаевск</h2>
-                        <button class="cards__item-title-btn" type="button" aria-label="Нравится"></button>
-                    </div>
-                </article>
-                <article class="cards__item">
-                    <img class="cards__item-img" src="./images/sundown.png" alt="Изображение вершины горы на закате">
-                    <div class="cards__item-title">
-                        <h2 class="cards__item-title-h">Гора Эльбрус</h2>
-                        <button class="cards__item-title-btn cards__item-title-btn_liked" type="button" aria-label="Нравится"></button>
-                    </div>
-                </article>
-                <article class="cards__item">
-                    <img class="cards__item-img" src="./images/mountains.png" alt="Изображение гор">
-                    <div class="cards__item-title">
-                        <h2 class="cards__item-title-h">Домбай</h2>
-                        <button class="cards__item-title-btn" type="button" aria-label="Нравится"></button>
-                    </div>
-                </article>
-                <article class="cards__item">
-                    <img class="cards__item-img" src="./images/sundown.png" alt="Изображение вершины горы на закате">
-                    <div class="cards__item-title">
-                        <h2 class="cards__item-title-h">Гора Эльбрус</h2>
-                        <button class="cards__item-title-btn" type="button" aria-label="Нравится"></button>
-                    </div>
-                </article>
-                <article class="cards__item">
-                    <img class="cards__item-img" src="./images/mountains.png" alt="Изображение гор">
-                    <div class="cards__item-title">
-                        <h2 class="cards__item-title-h">Домбай</h2>
-                        <button class="cards__item-title-btn" type="button" aria-label="Нравится"></button>
-                    </div>
-                </article>
-                <article class="cards__item">
-                    <img class="cards__item-img" src="./images/castle.png" alt="Изображение замка на горе">
-                    <div class="cards__item-title">
-                        <h2 class="cards__item-title-h">Карачаево-Черкессия</h2>
-                        <button class="cards__item-title-btn" type="button" aria-label="Нравится"></button>
-                    </div>
-                </article>
-            </section>
+
+            <div class="elements">
+            </div>
+
         </main>
         <footer class="footer">
             <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
         </footer>
     </div>
-    <div class="popup">
+    <div class="popup popup_type_edit">
         <div class="popup__overlay"></div>
         <div class="popup__container">
-            <button class="popup__close" type="button" title="Закрыть окно" aria-label="Закрыть форму"></button>
+            <button class="popup__close popup__close_edit" type="button" title="Закрыть окно" aria-label="Закрыть форму"></button>
             <form action="action" class="popup__form" name="popupform">
                 <fieldset class="popup__field">
                     <legend class="popup__header">Редактировать профиль</legend>
@@ -88,6 +48,41 @@
             </form>
         </div>
     </div>
+    <div class="popup popup_type_cards">
+        <div class="popup__overlay"></div>
+        <div class="popup__container">
+            <button class="popup__close popup__close_cards" type="button" title="Закрыть окно" aria-label="Закрыть форму"></button>
+            <form action="action" class="popup__form" name="popupform">
+                <fieldset class="popup__field">
+                    <legend class="popup__header">Новое место</legend>
+                    <input class="popup__input popup__input_card_name" type="text" placeholder="Название" name="place-name" required>
+                    <input class="popup__input popup__input_card_caption" type="url" placeholder="Ссылка на картинку" name="picture-link" required>
+                    <button class="popup__btn popup__btn_save" type="submit" aria-label="Кнопка создания">Создать</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="popup popup_type_image">
+        <div class="popup__overlay"></div>
+        <div class="popup__figure-container">
+            <figure class="popup__figure">
+                <img class="popup__image" src="#" alt="#">
+                <figcaption class="popup__caption"></figcaption>
+            </figure>
+            <button type="button" class="popup__close popup__close_image"></button>
+        </div>
+    </div>
+
+    <template id="card-template">
+      <div class="elements__card">
+        <img class="elements__image" src="#" alt="#">
+        <div class="elements__title-wrapper">
+          <h2 class="elements__title"></h2>
+          <button type="button" class="elements__like-button"></button>
+        </div>
+        <button class="elements__remove-button"></button>
+      </div>
+    </template>
     <script src="./pages/index.js"></script>
 </body>
 
