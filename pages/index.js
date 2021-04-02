@@ -5,6 +5,7 @@ const userName = document.querySelector('.profile__title');
 const userJob = document.querySelector('.profile__subtitle');
 const valueName = document.querySelector('.popup__input_field_name');
 const valueJob = document.querySelector('.popup__input_field_caption');
+const formElement = document.querySelector('.popup__form');
 
 function clickOpen() {
     popup.classList.add('popup_open');
@@ -18,8 +19,6 @@ function clickClose() {
 }
 popupClose.addEventListener('click', clickClose);
 
-const formElement = document.querySelector('.popup__form');
-
 function formSubmitHandler(evt) {
     evt.preventDefault();
     userName.textContent = valueName.value;
@@ -27,7 +26,6 @@ function formSubmitHandler(evt) {
     clickClose();
 }
 formElement.addEventListener('submit', formSubmitHandler);
-
 
 // Массив с картинками
 const initialCards = [{
@@ -99,7 +97,6 @@ initialCards.forEach(function(initialCard) {
 
 // Создание новой карточки
 const cardSaveBtn = document.querySelector('.popup__btn_save');
-const formAddCards = document.querySelector('.popup__form');
 
 function formSubmitCards(evt) {
     evt.preventDefault();
@@ -108,9 +105,9 @@ function formSubmitCards(evt) {
     const cardItem = createCard({ name: inputName.value, link: inputCaption.value });
     cardsContainer.prepend(cardItem);
 
-    formAddCards.reset();
-    inputName.value = ' ';
-    inputCaption.value = ' ';
+    formElement.reset();
+    // inputName.value = ' ';
+    // inputCaption.value = ' ';
 
     closeModalWindowCards();
 }
