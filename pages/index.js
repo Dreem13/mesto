@@ -1,31 +1,60 @@
 const popup = document.querySelector('.popup');
 const popupOpen = document.querySelector('.profile__info-text-button');
-const popupClose = document.querySelector('.popup__close');
+const popupClose = document.querySelector('.popup__close_edit');
 const userName = document.querySelector('.profile__title');
 const userJob = document.querySelector('.profile__subtitle');
 const valueName = document.querySelector('.popup__input_field_name');
 const valueJob = document.querySelector('.popup__input_field_caption');
-const formElement = document.querySelector('.popup__form');
+const formElementCards = document.querySelector('.popup__form_cards');
+const formElementProfile = document.querySelector('.popup__form_profile');
+const popupEditSaveBtn = document.querySelector('.popup__btn');
 
-function clickOpen() {
+// Контейнер для карточек
+const cardsContainer = document.querySelector('.elements');
+const cardTemplate = document.querySelector('#card-template').content;
+
+const cardSaveBtn = document.querySelector('.popup__btn_save'); // Кнопка создания новой карточки
+
+const modalWindowEdit = document.querySelector('.popup_type_edit');
+const modalWindowCards = document.querySelector('.popup_type_cards');
+const modalWindowImage = document.querySelector('.popup_type_image');
+
+const openModalAddCardsButton = document.querySelector('.profile__button');
+const closeModalAddCardsButton = document.querySelector('.popup__close_cards');
+
+const openModalImage = document.querySelector('.elements__image');
+const closeModalImage = document.querySelector('.popup__close_image');
+
+const popupCaption = document.querySelector('.popup__caption');
+const popupImageZoom = document.querySelector('.popup__image');
+
+function clickOpen(popup) {
     popup.classList.add('popup_open');
-    valueName.value = userName.textContent;
-    valueJob.value = userJob.textContent;
 }
-popupOpen.addEventListener('click', clickOpen);
 
-function clickClose() {
+function clickClose(popup) {
     popup.classList.remove('popup_open');
 }
-popupClose.addEventListener('click', clickClose);
 
-function formSubmitHandler(evt) {
-    evt.preventDefault();
-    userName.textContent = valueName.value;
-    userJob.textContent = valueJob.value;
-    clickClose();
-}
-formElement.addEventListener('submit', formSubmitHandler);
+popupOpen.addEventListener('click', function() {
+    clickOpen(modalWindowEdit);
+    valueName.value = userName.textContent;
+    valueJob.value = userJob.textContent;
+});
+
+popupClose.addEventListener('click', function() {
+    clickClose(modalWindowEdit);
+});
+
+popupEditSaveBtn.addEventListener('click', function() {
+    function formSubmitHandler(evt) {
+        evt.preventDefault();
+        userName.textContent = valueName.value;
+        userJob.textContent = valueJob.value;
+        clickClose(modalWindowEdit);
+    }
+    formElementProfile.addEventListener('submit', formSubmitHandler);
+});
 
 // Массив с картинками
 const initialCards = [{
@@ -54,10 +83,6 @@ const initialCards = [{
     }
 ];
 
-// Контейнер для карточек
-const cardsContainer = document.querySelector('.elements');
-const cardTemplate = document.querySelector('#card-template').content;
-
 // Функция для лайков
 function toggleLike(likeElement) {
     likeElement.classList.toggle('elements__like-button_active');
@@ -85,7 +110,6 @@ function createCard(cardData) {
     openModalImage.addEventListener('click', function() {
         openPopupImage(cardData);
     });
-
     return cardElement;
 }
 
@@ -95,8 +119,7 @@ initialCards.forEach(function(initialCard) {
     cardsContainer.append(cardElement);
 });
 
-// Создание новой карточки
-const cardSaveBtn = document.querySelector('.popup__btn_save');
+cardSaveBtn.addEventListener('click', formSubmitCards); // Создание новой карточки
 
 function formSubmitCards(evt) {
     evt.preventDefault();
@@ -104,14 +127,9 @@ function formSubmitCards(evt) {
     const inputCaption = document.querySelector('.popup__input_card_caption');
     const cardItem = createCard({ name: inputName.value, link: inputCaption.value });
     cardsContainer.prepend(cardItem);
-
-    formElement.reset();
-    // inputName.value = ' ';
-    // inputCaption.value = ' ';
-
-    closeModalWindowCards();
+    formElementCards.reset();
+    clickClose(modalWindowCards);
 }
-cardSaveBtn.addEventListener('click', formSubmitCards);
 
 // Удаление карточки
 function deleteCard(evt) {
@@ -119,43 +137,22 @@ function deleteCard(evt) {
 }
 
 // Открытие/Закрытие попапов
-const modalWindowEdit = document.querySelector('.popup_type_edit');
-const modalWindowCards = document.querySelector('.popup_type_cards');
-const modalWindowImage = document.querySelector('.popup_type_image');
+openModalAddCardsButton.addEventListener('click', function() {
+    clickOpen(modalWindowCards);
+});
 
-const openModalAddCardsButton = document.querySelector('.profile__button');
-const closeModalAddCardsButton = document.querySelector('.popup__close_cards');
-const openModalImage = document.querySelector('.elements__image');
-const closeModalImage = document.querySelector('.popup__close_image');
+closeModalAddCardsButton.addEventListener('click', function() {
+    clickClose(modalWindowCards);
+});
 
-function openModalWindowCards() {
-    modalWindowCards.classList.add('popup_open');
-}
-openModalAddCardsButton.addEventListener('click', openModalWindowCards);
-
-function closeModalWindowCards() {
-    modalWindowCards.classList.remove('popup_open');
-}
-closeModalAddCardsButton.addEventListener('click', closeModalWindowCards);
-
-function openModalWindowImage() {
-    modalWindowImage.classList.add('popup_open');
-}
-openModalImage.addEventListener('click', openModalWindowImage);
-
-function closeModalWindowImage() {
-    modalWindowImage.classList.remove('popup_open');
-}
-closeModalImage.addEventListener('click', closeModalWindowImage);
+closeModalImage.addEventListener('click', function() {
+    clickClose(modalWindowImage);
+});
 
 // Зум картинок
-const popupCaption = document.querySelector('.popup__caption');
-const popupImageZoom = document.querySelector('.popup__image');
-
 function openPopupImage(data) {
+    clickOpen(modalWindowImage);
     popupCaption.textContent = data.name;
     popupImageZoom.src = data.link;
     popupImageZoom.alt = data.name;
-
-    openModalWindowImage(data);
 }
