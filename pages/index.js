@@ -1,12 +1,12 @@
-const popupEditProfile = document.querySelector('.popup'); 
+const popupEditProfile = document.querySelector('.popup');
 const openEditProfilePopupBtn = document.querySelector('.profile__info-text-button');
 const closeEditProfilePopupBtn = document.querySelector('.popup__close_edit');
 const userName = document.querySelector('.profile__title');
 const userJob = document.querySelector('.profile__subtitle');
 const valueName = document.querySelector('.popup__input_field_name');
 const valueJob = document.querySelector('.popup__input_field_caption');
-const formElementCards = document.querySelector('.popup__form_type_cards');
-const formElementProfile = document.querySelector('.popup__form_type_profile');
+const formElementCards = document.querySelector('.popup__form-cards');
+const formElementProfile = document.querySelector('.popup__form-profile');
 const popupEditSaveBtn = document.querySelector('.popup__btn');
 
 // Контейнер для карточек
