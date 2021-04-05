@@ -49,15 +49,13 @@ closeEditProfilePopupBtn.addEventListener('click', function() {
     clickClose(modalWindowEdit);
 });
 
-popupEditSaveBtn.addEventListener('click', function() {
-    function submitEditProfileForm(evt) {
-        evt.preventDefault();
-        userName.textContent = valueName.value;
-        userJob.textContent = valueJob.value;
-        clickClose(modalWindowEdit);
-    }
-    formElementProfile.addEventListener('submit', submitEditProfileForm);
+formElementProfile.addEventListener('submit', function submitEditProfileForm(evt) {
+    evt.preventDefault();
+    userName.textContent = valueName.value;
+    userJob.textContent = valueJob.value;
+    clickClose(modalWindowEdit);
 });
+
 
 // Функция для лайков
 function toggleLike(likeElement) {
@@ -69,7 +67,6 @@ function createCard(cardData) {
 
     const cardElement = cardTemplate.cloneNode(true);
     cardElement.querySelector('.elements__title').textContent = cardData.name;
-    cardElement.querySelector('.elements__image').src = cardData.link;
 
     const elementLike = cardElement.querySelector('.elements__like-button');
     elementLike.addEventListener('click', function() {
