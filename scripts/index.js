@@ -42,11 +42,11 @@ function clickClose(popup) {
     document.removeEventListener('keydown', closePopupEscButton);
 }
 
-function closePopupEscButton (evt) {
-  const currentPopup = document.querySelector('.popup_open');
-  if (evt.key === 'Escape') {
-    clickClose(currentPopup);
-  };
+function closePopupEscButton(evt) {
+    const currentPopup = document.querySelector('.popup_open');
+    if (evt.key === 'Escape') {
+        clickClose(currentPopup);
+    };
 }
 
 openEditProfilePopupBtn.addEventListener('click', function() {
@@ -91,7 +91,7 @@ function createCard(cardData) {
     openModalImage.src = cardData.link;
 
     openModalImage.addEventListener('click', function() {
-    openPopupImage(cardData);
+        openPopupImage(cardData);
     });
     return cardElement;
 }
@@ -110,7 +110,7 @@ function submitAddCardForm(evt) {
     cardsContainer.prepend(cardItem);
     formElementCards.reset();
     clickClose(modalWindowCards);
-    
+
 }
 
 // Удаление карточки
@@ -134,21 +134,21 @@ closeModalImage.addEventListener('click', function() {
 // Закрытие попапов по клику на оверлей
 // Профиль
 modalWindowEdit.addEventListener('mousedown', (evt) => {
-  if (evt.target.classList.contains('popup__overlay')) {
-    clickClose(modalWindowEdit);
-  }
+    if (evt.target.classList.contains('popup__overlay')) {
+        clickClose(modalWindowEdit);
+    }
 });
 // Добавление карточек
 modalWindowCards.addEventListener('mousedown', (evt) => {
-  if (evt.target.classList.contains('popup__overlay')) {
-    clickClose(modalWindowCards);
-  }
+    if (evt.target.classList.contains('popup__overlay')) {
+        clickClose(modalWindowCards);
+    }
 });
 // Зум картинок
 modalWindowImage.addEventListener('mousedown', (evt) => {
-  if (evt.target.classList.contains('popup__overlay')) {
-    clickClose(modalWindowImage);
-  }
+    if (evt.target.classList.contains('popup__overlay')) {
+        clickClose(modalWindowImage);
+    }
 });
 
 // Зум картинок
@@ -161,15 +161,15 @@ function openPopupImage(data) {
 
 // Удаление ошибок, при повторном открытии попапа
 const removeErrors = (elem) => {
-  const currentInputs = elem.querySelectorAll('.popup__input')
-  currentInputs.forEach((input) => {
-  hideInputError(input, params);
-  });
+    const currentInputs = elem.querySelectorAll('.popup__input')
+    currentInputs.forEach((input) => {
+        hideInputError(input, params);
+    });
 }
 
 // Отключение кнопки
 const disableSubmitBtn = (elem) => {
-  const currentButton = elem.querySelector('.popup__btn');
-  const currentInputsList = Array.from(elem.querySelectorAll('.popup__input'));
-  toggleButtonState(currentInputsList, currentButton, params);
+    const currentButton = elem.querySelector('.popup__btn');
+    const currentInputsList = Array.from(elem.querySelectorAll('.popup__input'));
+    toggleButtonState(currentInputsList, currentButton, params);
 }
