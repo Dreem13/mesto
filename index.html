@@ -32,29 +32,54 @@
             <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
         </footer>
     </div>
+
     <div class="popup popup_type_edit">
         <div class="popup__overlay"></div>
         <div class="popup__container">
             <button class="popup__close popup__close_edit" type="button" title="Закрыть окно" aria-label="Закрыть форму"></button>
-            <form action="action" class="popup__form-profile" name="popupform">
+
+            <form action="action" class="popup__form popup__form-profile" name="profile" autocomplete="off" novalidate>
                 <fieldset class="popup__field">
                     <legend class="popup__header">Редактировать профиль</legend>
-                    <input class="popup__input popup__input_field_name" type="text" value="" placeholder="Имя пользователя" name="username" required>
-                    <input class="popup__input popup__input_field_caption" type="text" value="" placeholder="Профессия" name="userjob" required>
+                        <div class="popup__input_container">
+                            <input class="popup__input popup__input_field_name" type="text"
+                            name="username" required id="name-input" placeholder="Имя пользователя"
+                            minlength="2" maxlength="40">
+                            <span class="error" id="name-input--error"></span>
+                        </div>
+                        <div class="popup__input_container">
+                        <input class="popup__input popup__input_field_caption" type="text"
+                        placeholder="Профессия" name="userjob" required id="work-input" minlength="2"
+                        maxlength="200">
+                        <span class="error" id="work-input--error"></span>
+                        </div>
+
+
                     <button class="popup__btn" type="submit" aria-label="Кнопка сохранить">Сохранить</button>
                 </fieldset>
             </form>
+
         </div>
     </div>
+
     <div class="popup popup_type_cards">
         <div class="popup__overlay"></div>
         <div class="popup__container">
             <button class="popup__close popup__close_cards" type="button" title="Закрыть окно" aria-label="Закрыть форму"></button>
-            <form action="action" class="popup__form-cards" name="popupform">
+            <form action="action" class="popup__form popup__form-cards" name="card" autocomplete="off">
                 <fieldset class="popup__field">
                     <legend class="popup__header">Новое место</legend>
-                    <input class="popup__input popup__input_card_name" type="text" placeholder="Название" name="place-name" required>
-                    <input class="popup__input popup__input_card_caption" type="url" placeholder="Ссылка на картинку" name="picture-link" required>
+                    <div class="popup__input_container">
+                    <input class="popup__input popup__input_card_name" type="text"
+                    placeholder="Название" name="place-name" required id="card-input"
+                    minlength="2" maxlength="30">
+                    <span class="error" id="card-input--error"></span>
+                    </div>
+                    <div class="popup__input_container">
+                    <input class="popup__input popup__input_card_caption" type="url"
+                    placeholder="Ссылка на картинку" name="picture-link" required id="url-input">
+                    <span class="error" id="url-input--error"></span>
+                    </div>
                     <button class="popup__btn popup__btn_save" type="submit" aria-label="Кнопка создания">Создать</button>
                 </fieldset>
             </form>
@@ -80,8 +105,10 @@
         <button class="elements__remove-button"></button>
       </div>
     </template>
-    <script src="./pages/initial-cards.js"></script>
-    <script src="./pages/index.js"></script>
+    <script src="./scripts/initial-cards.js"></script>
+    <script src="./scripts/index.js"></script>
+    <script src="./scripts/validation.js"></script>
+
 </body>
 
 </html>

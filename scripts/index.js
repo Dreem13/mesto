@@ -8,6 +8,7 @@ const valueJob = document.querySelector('.popup__input_field_caption');
 const formElementCards = document.querySelector('.popup__form-cards');
 const formElementProfile = document.querySelector('.popup__form-profile');
 const popupEditSaveBtn = document.querySelector('.popup__btn');
+const popupForm = document.querySelector('.popup__form');
 
 // Контейнер для карточек
 const cardsContainer = document.querySelector('.elements');
@@ -33,10 +34,19 @@ const inputCaption = document.querySelector('.popup__input_card_caption');
 
 function clickOpen(popup) {
     popup.classList.add('popup_open');
+    document.addEventListener('keydown', closePopupEscButton);
 }
 
 function clickClose(popup) {
     popup.classList.remove('popup_open');
+    document.removeEventListener('keydown', closePopupEscButton);
+}
+
+function closePopupEscButton (evt) {
+  const currentPopup = document.querySelector('.popup_open');
+  if (evt.key === 'Escape') {
+    clickClose(currentPopup);
+  };
 }
 
 openEditProfilePopupBtn.addEventListener('click', function() {
@@ -54,8 +64,8 @@ formElementProfile.addEventListener('submit', function submitEditProfileForm(evt
     userName.textContent = valueName.value;
     userJob.textContent = valueJob.value;
     clickClose(modalWindowEdit);
+    closePopupEscButton();
 });
-
 
 // Функция для лайков
 function toggleLike(likeElement) {
@@ -81,7 +91,7 @@ function createCard(cardData) {
     openModalImage.src = cardData.link;
 
     openModalImage.addEventListener('click', function() {
-        openPopupImage(cardData);
+    openPopupImage(cardData);
     });
     return cardElement;
 }
@@ -100,6 +110,7 @@ function submitAddCardForm(evt) {
     cardsContainer.prepend(cardItem);
     formElementCards.reset();
     clickClose(modalWindowCards);
+    
 }
 
 // Удаление карточки
@@ -120,10 +131,45 @@ closeModalImage.addEventListener('click', function() {
     clickClose(modalWindowImage);
 });
 
+// Закрытие попапов по клику на оверлей
+// Профиль
+modalWindowEdit.addEventListener('mousedown', (evt) => {
+  if (evt.target.classList.contains('popup__overlay')) {
+    clickClose(modalWindowEdit);
+  }
+});
+// Добавление карточек
+modalWindowCards.addEventListener('mousedown', (evt) => {
+  if (evt.target.classList.contains('popup__overlay')) {
+    clickClose(modalWindowCards);
+  }
+});
+// Зум картинок
+modalWindowImage.addEventListener('mousedown', (evt) => {
+  if (evt.target.classList.contains('popup__overlay')) {
+    clickClose(modalWindowImage);
+  }
+});
+
 // Зум картинок
 function openPopupImage(data) {
     clickOpen(modalWindowImage);
     popupCaption.textContent = data.name;
     popupImageZoom.src = data.link;
     popupImageZoom.alt = data.name;
+}
+
+// Удаление ошибок, при повторном открытии попапа
+const removeErrors = (elem) => {
+  const currentInputs = elem.querySelectorAll('.popup__input')
+  currentInputs.forEach((input) => {
+  hideInputError(input, params);
+  });
+}
+
+// Отключение кнопки
+const disableSubmitBtn = (elem) => {
+  const currentButton = elem.querySelector('.popup__btn');
+  const currentInputsList = Array.from(elem.querySelectorAll('.popup__input'));
+  toggleButtonState(currentInputsList, currentButton, params);
 }
