@@ -18,6 +18,8 @@ const cardSaveBtn = document.querySelector('.popup__btn_save'); // Кнопка 
 
 const modalWindowEdit = document.querySelector('.popup_type_edit');
 const modalWindowCards = document.querySelector('.popup_type_cards');
+const formAddCard = document.querySelector('.popup__form-cards');
+
 const modalWindowImage = document.querySelector('.popup_type_image');
 
 const openModalAddCardsButton = document.querySelector('.profile__button');
@@ -35,6 +37,7 @@ const inputCaption = document.querySelector('.popup__input_card_caption');
 function clickOpen(popup) {
     popup.classList.add('popup_open');
     document.addEventListener('keydown', closePopupEscButton);
+    resetFormState(popup, params);
 }
 
 function clickClose(popup) {
@@ -59,12 +62,11 @@ closeEditProfilePopupBtn.addEventListener('click', function() {
     clickClose(modalWindowEdit);
 });
 
-formElementProfile.addEventListener('submit', function submitEditProfileForm(evt) {
+formElementProfile.addEventListener('submit', function(evt) {
     evt.preventDefault();
     userName.textContent = valueName.value;
     userJob.textContent = valueJob.value;
     clickClose(modalWindowEdit);
-    closePopupEscButton();
 });
 
 // Функция для лайков
@@ -108,9 +110,7 @@ function submitAddCardForm(evt) {
     evt.preventDefault();
     const cardItem = createCard({ name: inputName.value, link: inputCaption.value });
     cardsContainer.prepend(cardItem);
-    formElementCards.reset();
     clickClose(modalWindowCards);
-
 }
 
 // Удаление карточки
@@ -118,13 +118,22 @@ function deleteCard(evt) {
     evt.target.closest('.elements__card').remove();
 }
 
+// Функция неактивной кнопки
+function buttonDisabled (popup) {
+  const btn = popup.querySelector('.popup__btn_save');
+  btn.classList.add('popup__btn_disabled');
+  btn.setAttribute("disabled", true);
+}
 // Открытие/Закрытие попапов
 openModalAddCardsButton.addEventListener('click', function() {
     clickOpen(modalWindowCards);
+    buttonDisabled(modalWindowCards);
+    formAddCard.reset();
 });
 
 closeModalAddCardsButton.addEventListener('click', function() {
     clickClose(modalWindowCards);
+
 });
 
 closeModalImage.addEventListener('click', function() {
@@ -138,12 +147,14 @@ modalWindowEdit.addEventListener('mousedown', (evt) => {
         clickClose(modalWindowEdit);
     }
 });
+
 // Добавление карточек
 modalWindowCards.addEventListener('mousedown', (evt) => {
     if (evt.target.classList.contains('popup__overlay')) {
         clickClose(modalWindowCards);
     }
 });
+
 // Зум картинок
 modalWindowImage.addEventListener('mousedown', (evt) => {
     if (evt.target.classList.contains('popup__overlay')) {
@@ -157,19 +168,4 @@ function openPopupImage(data) {
     popupCaption.textContent = data.name;
     popupImageZoom.src = data.link;
     popupImageZoom.alt = data.name;
-}
-
-// Удаление ошибок, при повторном открытии попапа
-const removeErrors = (elem) => {
-    const currentInputs = elem.querySelectorAll('.popup__input')
-    currentInputs.forEach((input) => {
-        hideInputError(input, params);
-    });
-}
-
-// Отключение кнопки
-const disableSubmitBtn = (elem) => {
-    const currentButton = elem.querySelector('.popup__btn');
-    const currentInputsList = Array.from(elem.querySelectorAll('.popup__input'));
-    toggleButtonState(currentInputsList, currentButton, params);
 }

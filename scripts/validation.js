@@ -1,10 +1,28 @@
+const params = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__btn',
+  inactiveButtonClass: 'popup__btn_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'error',
+};
+
 // Показать ошибки
 const showInputError = (formElement, inputElement, params) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}--error`);
-    inputElement.classList.add(params.inputErrorClass);
+    inputElement.classList.add('popup__input_type_error');
     errorElement.textContent = inputElement.validationMessage;
-    errorElement.classList.add(params.errorClass);
+    errorElement.classList.add('error');
 };
+
+// Скрыть ошибки при повторном открытии попапа
+const resetFormState = (formElement, params) => {
+  const inputList = Array.from(formElement.querySelectorAll(params.inputSelector));
+  inputList.forEach(inputElement => {
+      hideInputError(formElement, inputElement, params);
+  })
+}
+
 // Убрать ошибки
 const hideInputError = (formElement, inputElement, params) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}--error`);
@@ -62,14 +80,7 @@ const enableValidation = (params) => {
     });
 };
 
-enableValidation({
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__btn',
-    inactiveButtonClass: 'popup__btn_disabled',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'error_visible',
-});
+enableValidation(params);
 
 function preventFormSubmit(event) {
     event.preventDefault();
