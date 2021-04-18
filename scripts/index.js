@@ -37,7 +37,6 @@ const inputCaption = document.querySelector('.popup__input_card_caption');
 function clickOpen(popup) {
     popup.classList.add('popup_open');
     document.addEventListener('keydown', closePopupEscButton);
-    resetFormState(popup, params);
 }
 
 function clickClose(popup) {
@@ -56,6 +55,7 @@ openEditProfilePopupBtn.addEventListener('click', function() {
     clickOpen(modalWindowEdit);
     valueName.value = userName.textContent;
     valueJob.value = userJob.textContent;
+    resetFormState(modalWindowEdit, params);
 });
 
 closeEditProfilePopupBtn.addEventListener('click', function() {
@@ -129,6 +129,7 @@ openModalAddCardsButton.addEventListener('click', function() {
     clickOpen(modalWindowCards);
     buttonDisabled(modalWindowCards);
     formAddCard.reset();
+    resetFormState(modalWindowCards, params);
 });
 
 closeModalAddCardsButton.addEventListener('click', function() {
