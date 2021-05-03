@@ -1,12 +1,12 @@
     export class FormValidator {
         constructor(params, formElement) {
-            this.params = params;
-            this.formElement = formElement;
+            this._params = params;
+            this._formElement = formElement;
         }
 
         _inputListener() {
-            const inputs = Array.from(this.formElement.querySelectorAll(this.params.inputSelector));
-            const button = this.formElement.querySelector(this.params.submitButtonSelector);
+            const inputs = Array.from(this._formElement.querySelectorAll(this._params.inputSelector));
+            const button = this._formElement.querySelector(this._params.submitButtonSelector);
             inputs.forEach(input => {
                 input.addEventListener('input', () => {
                     this._checkInputValidity(input);
@@ -17,7 +17,7 @@
 
         enableValidation() {
             this._inputListener();
-            this.formElement.addEventListener('submit', (evt) => {
+            this._formElement.addEventListener('submit', (evt) => {
                 evt.preventDefault();
             });
         };
@@ -33,27 +33,29 @@
 
         // Показать ошибки
         _showInputError(input) {
-            const errorElement = this.formElement.querySelector(`#${input.id}--error`);
-            input.classList.add(this.params.inputErrorClass);
+            const errorElement = this._formElement.querySelector(`#${input.id}--error`);
+            input.classList.add(this._params.inputErrorClass);
             errorElement.textContent = input.validationMessage;
-            errorElement.classList.add(this.params.errorClass);
+            errorElement.classList.add(this._params.errorClass);
         }
 
         // Убрать ошибки
         _hideInputError(input) {
-            const errorElement = this.formElement.querySelector(`#${input.id}--error`);
-            input.classList.remove(this.params.inputErrorClass);
-            errorElement.classList.remove(this.params.errorClass);
+            const errorElement = this._formElement.querySelector(`#${input.id}--error`);
+            input.classList.remove(this._params.inputErrorClass);
+            errorElement.classList.remove(this._params.errorClass);
             errorElement.textContent = '';
         }
 
-        // // Скрыть ошибки при повторном открытии попапа
-        _resetFormState() {
-            const inputList = Array.from(this.formElement.querySelectorAll(params.inputSelector));
+        // Скрыть ошибки при повторном открытии попапа и деактивация кнопки
+        resetFormState(inputs, button) {
+            const inputList = Array.from(this._formElement.querySelectorAll(this._params.inputSelector));
             inputList.forEach(input => {
                 this._hideInputError(input);
             });
-            _toggleButtonState(inputs, button);
+            const btn = this._formElement.querySelector(this._params.submitButtonSelector);
+            btn.classList.add(this._params.inactiveButtonClass);
+            btn.setAttribute("disabled", true);
         }
 
         // Ищем невалидные поля
@@ -66,10 +68,10 @@
         // Неактивная кнопка
         _toggleButtonState(inputs, button) {
             if (this._hasInvalidInput(inputs)) {
-                button.classList.add(this.params.inactiveButtonClass);
+                button.classList.add(this._params.inactiveButtonClass);
                 button.disabled = true;
             } else {
-                button.classList.remove(this.params.inactiveButtonClass);
+                button.classList.remove(this._params.inactiveButtonClass);
                 button.disabled = false;
             }
         }

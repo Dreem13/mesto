@@ -1,7 +1,7 @@
-import { Card } from './card.js';
-import { FormValidator } from './validation.js';
-import { initialCards } from './initial-card.js';
-import { clickOpen, clickClose } from './utils/utils.js';
+import { Card } from './Сard.js';
+import { FormValidator } from './FormValidator.js';
+import { initialCards } from './Initial-card.js';
+import { clickOpen, clickClose } from './Utils/Utils.js';
 
 const params = {
     formSelector: '.popup__form',
@@ -47,9 +47,7 @@ function createCard({ name, link }) {
 
 //Перебор массива
 initialCards.forEach(function(initialCard) {
-    const name = initialCard.name;
-    const link = initialCard.link;
-    cardsContainer.append(createCard({ name, link }));
+    cardsContainer.append(createCard(initialCard));
 });
 
 function submitAddCardForm(evt) {
@@ -59,18 +57,10 @@ function submitAddCardForm(evt) {
     clickClose(modalWindowCards);
 }
 
-// Функция неактивной кнопки
-function buttonDisabled(popup) {
-    const btn = popup.querySelector('.popup__btn_save');
-    btn.classList.add('popup__btn_disabled');
-    btn.setAttribute("disabled", true);
-}
-
 // Открытие/Закрытие попапов
 openModalAddCardsButton.addEventListener('click', function() {
     clickOpen(modalWindowCards);
-    buttonDisabled(modalWindowCards);
-    // resetFormState(modalWindowEdit, params);
+    addCardValidator.resetFormState();
     formAddCard.reset();
 });
 
@@ -110,14 +100,14 @@ openEditProfilePopupBtn.addEventListener('click', function() {
     formElementProfile.reset();
     valueName.value = userName.textContent;
     valueJob.value = userJob.textContent;
-    // resetFormState(modalWindowEdit, params);
+    editFormValidator.resetFormState();
 });
 
 closeEditProfilePopupBtn.addEventListener('click', function() {
     clickClose(modalWindowEdit);
 });
 
-cardSaveBtn.addEventListener('click', submitAddCardForm); // Создание новой карточки
+modalWindowCards.addEventListener('submit', submitAddCardForm);
 
 formElementProfile.addEventListener('submit', function(evt) {
     evt.preventDefault();
