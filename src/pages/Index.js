@@ -38,16 +38,7 @@ const popupEdit = new PopupWithForm ('.popup_type_edit',
 popupEdit.setEventListeners();
 
 //попап добавления карточек
-const popupAdd = new PopupWithForm('.popup_type_cards', {
-  renderer: () => {
-      const cardElement = createCard({
-          name: inputName.value,
-          link: inputCaption.value,
-      });
-      renderCard.addItem(createCard());
-      popupAdd.close();
-  }
-});
+const popupAdd = new PopupWithForm ('.popup_type_cards', submitHandlerCard);
 popupAdd.setEventListeners();
 
 // открыть превью
@@ -64,15 +55,31 @@ const createCard = (item) => {
   return cardElementNew;
 }
 
-// получение всех карточек
+// добавление карточек
 const renderCard = new Section ({
-  items: initialCards, renderer: (item) => {
+  items: initialCards,
+  renderer: (items) => {
+    items.forEach(item => {
       const cardElement = createCard(item);
-      renderCard.addItem(cardElement, 'prepend');
+      return renderCard.addItem(cardElement);
+    })
   }
-},
-  cardsContainer);
+}, '.elements'
+);
 renderCard.getElement();
+
+//
+function submitHandlerCard (values) {
+  const renderCard = new Section ({
+    items: values,
+    renderer: (items) => {
+        const cardElement = createCard(items);
+        return renderCard.addItem(cardElement);
+    }
+  }, '.elements'
+  );
+  return renderCard.getElement();
+}
 
 // открытие попапа профиля
 openEditProfilePopupBtn.addEventListener('click', () => {

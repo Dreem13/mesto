@@ -6,12 +6,12 @@ constructor (popupSelector) {
 
 open () {
   this.popup.classList.add('popup_open');
-  document.addEventListener('keydown', this._handleEscClose.bind(this));
+  document.addEventListener('keyup', (evt) => this._handleEscClose(evt));
 }
 
 close () {
   this.popup.classList.remove('popup_open');
-  document.removeEventListener('keydown', this._handleEscClose.bind(this));
+  document.removeEventListener('keyup', (evt) => this._handleEscClose(evt));
 }
 
 _handleEscClose = (evt) => {
@@ -22,7 +22,7 @@ _handleEscClose = (evt) => {
 }
 
 setEventListeners () {
-  this.popup.querySelector('.popup__close').addEventListener('click', () => { this.close(); } );
+  this.popup.querySelector('.popup__close').addEventListener('click', () => this.close());
 }
 
 }
