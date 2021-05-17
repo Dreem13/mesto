@@ -1,0 +1,97 @@
+import Card from '../components/Сard.js';
+import FormValidator from '../components/FormValidator.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import Section from '../components/Section.js';
+import UserInfo from '../components/UserInfo.js';
+import {
+  cardsContainer,
+  userName,
+  userJob,
+  modalWindowEdit,
+  modalWindowCards,
+  inputName,
+  inputCaption,
+  valueName,
+  valueJob,
+  modalWindowImage,
+  openEditProfilePopupBtn,
+  openModalAddCardsButton,
+  initialCards,
+  formElementProfile,
+  formAddCard,
+  params,
+} from '../utils/constants.js';
+
+//получение инпутов
+const userInfo = new UserInfo({name: valueName, info: valueJob});
+
+// попап профиля
+const popupEdit = new PopupWithForm ('.popup_type_edit',
+    {
+        renderer: (data) => {
+            userInfo.setUserInfo(data);
+            popupEdit.close();
+        }
+    }
+);
+popupEdit.setEventListeners();
+
+//попап добавления карточек
+const popupAdd = new PopupWithForm('.popup_type_cards', {
+  renderer: () => {
+      const cardElement = createCard({
+          name: inputName.value,
+          link: inputCaption.value,
+      });
+      renderCard.addItem(createCard());
+      popupAdd.close();
+  }
+});
+popupAdd.setEventListeners();
+
+// открыть превью
+const popupImage = new PopupWithImage ('.popup_type_image');
+function handleCardClick(data) {
+  popupImage.open(data);
+}
+popupImage.setEventListeners();
+
+// создание карточки
+const createCard = (item) => {
+  const card = new Card(item, '#card-template', handleCardClick);
+  const cardElementNew = card.createCard();
+  return cardElementNew;
+}
+
+// получение всех карточек
+const renderCard = new Section ({
+  items: initialCards, renderer: (item) => {
+      const cardElement = createCard(item);
+      renderCard.addItem(cardElement, 'prepend');
+  }
+},
+  cardsContainer);
+renderCard.getElement();
+
+// открытие попапа профиля
+openEditProfilePopupBtn.addEventListener('click', () => {
+  valueName.value = userInfo.getUserInfo().name;
+  valueJob.value = userInfo.getUserInfo().info;
+  popupEdit.open();
+  formElementProfile.reset();
+  editFormValidator.resetFormState();
+});
+
+// открытие попапа карточек
+openModalAddCardsButton.addEventListener('click', () => {
+    popupAdd.open();
+    addCardValidator.resetFormState();
+});
+
+//Добавление валидации для форм
+const addCardValidator = new FormValidator(params, formAddCard);
+const editFormValidator = new FormValidator(params, formElementProfile);
+
+addCardValidator.enableValidation();
+editFormValidator.enableValidation();
