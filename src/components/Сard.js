@@ -22,9 +22,9 @@ export default class Card {
     }
 
     getEventListeners() {
-        this.like.addEventListener('click', () => this._likeCard());
-        this.deleteButton.addEventListener('click', () => this._deleteCard());
-        this.cardElementImage.addEventListener('click', () => this._previewCard());
+        this.like.addEventListener('click', (evt) => this._likeCard(evt));
+        this.deleteButton.addEventListener('click', (evt) => this._deleteCard(evt));
+        this.cardElementImage.addEventListener('click', (evt) => this._previewCard(evt));
     }
 
     _likeCard() {

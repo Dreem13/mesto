@@ -51,7 +51,7 @@ popupImage.setEventListeners();
 // создание карточки
 const createCard = (item) => {
   const card = new Card(item, '#card-template', handleCardClick);
-  const cardElementNew = card.createCard();
+  const cardElementNew = card.renderCard();
   return cardElementNew;
 }
 
@@ -59,7 +59,7 @@ const createCard = (item) => {
 const renderCard = new Section ({
   items: initialCards,
   renderer: (items) => {
-    items.forEach(item => {
+    items.reverse().forEach(item => {
       const cardElement = createCard(item);
       return renderCard.addItem(cardElement);
     })
