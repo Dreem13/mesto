@@ -24,17 +24,16 @@ import {
 } from '../utils/constants.js';
 
 //получение инпутов
-const userInfo = new UserInfo({name: valueName, info: valueJob});
+const userInfo = new UserInfo({name: userName, info: userJob});
+
+// функция передачи данных профиля
+const renderer = function (data) {
+   userInfo.setUserInfo(data);
+   popupEdit.close();
+ }
 
 // попап профиля
-const popupEdit = new PopupWithForm ('.popup_type_edit',
-    {
-        renderer: (data) => {
-            userInfo.setUserInfo(data);
-            popupEdit.close();
-        }
-    }
-);
+const popupEdit = new PopupWithForm ('.popup_type_edit', renderer);
 popupEdit.setEventListeners();
 
 //попап добавления карточек

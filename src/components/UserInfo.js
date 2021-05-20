@@ -12,8 +12,8 @@ export default class UserInfo {
   }
 
   setUserInfo = (user) => { // новые данные пользователя
-    this._name.textContent = user.name;
-    this._info.textContent = user.link;
+    this._name.textContent = user.username;
+    this._info.textContent = user.userjob;
   }
 
 }
