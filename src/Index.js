@@ -1,9 +1,9 @@
-import Card from '../components/Сard.js';
-import FormValidator from '../components/FormValidator.js';
-import PopupWithImage from '../components/PopupWithImage.js';
-import PopupWithForm from '../components/PopupWithForm.js';
-import Section from '../components/Section.js';
-import UserInfo from '../components/UserInfo.js';
+import Card from './components/Сard.js';
+import FormValidator from './components/FormValidator.js';
+import PopupWithImage from './components/PopupWithImage.js';
+import PopupWithForm from './components/PopupWithForm.js';
+import Section from './components/Section.js';
+import UserInfo from './components/UserInfo.js';
 import {
   cardsContainer,
   userName,
@@ -21,7 +21,9 @@ import {
   formElementProfile,
   formAddCard,
   params,
-} from '../utils/constants.js';
+} from './utils/constants.js';
+
+import './pages/index.css';
 
 //получение инпутов
 const userInfo = new UserInfo({name: userName, info: userJob});

@@ -11,12 +11,12 @@
 <body class="page">
     <div class="page-container">
         <header class="header">
-          <a class="header__logo"><img src="./src/images/logo_w.svg" alt="Логотип портала Место"></a>
+          <a class="header__logo"><img src="<%=require('./images/logo_w.svg')%>" alt="Логотип портала Место"></a>
         </header>
         <main>
             <section class="profile">
                 <div class="profile__info">
-                    <img class="profile__info-img" src="./src/images/kusto.png" alt="Фотография пользователя">
+                    <img class="profile__info-img" src="<%=require('./images/kusto.png')%>" alt="Фотография пользователя">
                     <div class="profile__info-text">
                         <h1 class="profile__title">Жак Ив Кусто</h1>
                         <p class="profile__subtitle">Исследователь океана</p>
@@ -93,7 +93,7 @@
       </div>
     </template>
 
-    <script type="module" src="./src/pages/Index.js"></script>
+
 
 
 </body>
