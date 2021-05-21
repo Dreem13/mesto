@@ -2,7 +2,7 @@
     "name": "mesto_edit",
     "version": "1.0.0",
     "description": "Проект об интересных местах в мире. Выполнен в рамках обучения на курсе веб-разработки Яндекс.Практикум.",
-    "main": "Index.js",
+    "main": "index.js",
     "scripts": {
         "build": "webpack --mode production",
         "dev": "webpack serve"

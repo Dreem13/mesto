@@ -5,16 +5,10 @@ import PopupWithForm from './components/PopupWithForm.js';
 import Section from './components/Section.js';
 import UserInfo from './components/UserInfo.js';
 import {
-    // cardsContainer,
     userName,
     userJob,
-    // modalWindowEdit,
-    // modalWindowCards,
-    // inputName,
-    // inputCaption,
     valueName,
     valueJob,
-    // modalWindowImage,
     openEditProfilePopupBtn,
     openModalAddCardsButton,
     initialCards,
@@ -69,7 +63,6 @@ const renderCard = new Section({
 }, '.elements');
 renderCard.getElement();
 
-//
 function submitHandlerCard(values) {
     const renderCard = new Section({
         items: values,
