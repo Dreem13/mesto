@@ -75,5 +75,4 @@
                 button.disabled = false;
             }
         }
-
     }
