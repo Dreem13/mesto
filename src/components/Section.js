@@ -6,7 +6,7 @@ export default class Section {
         this._containerSection = document.querySelector(this._containerSelector);
     }
 
-    getElement() {
+    render() {
         this._renderer(this._items);
     }
 

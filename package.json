@@ -25,5 +25,7 @@
         "webpack-cli": "^4.7.0",
         "webpack-dev-server": "^3.11.2"
     },
-    "dependencies": {}
+    "dependencies": {
+        "core-js": "^3.12.1"
+    }
 }

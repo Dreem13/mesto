@@ -23,13 +23,13 @@ import './index.css';
 const userInfo = new UserInfo({ name: userName, info: userJob });
 
 // функция передачи данных профиля
-const renderer = function(data) {
+const editFormSubmitHandler = function(data) {
     userInfo.setUserInfo(data);
     popupEdit.close();
 }
 
 // попап профиля
-const popupEdit = new PopupWithForm('.popup_type_edit', renderer);
+const popupEdit = new PopupWithForm('.popup_type_edit', editFormSubmitHandler);
 popupEdit.setEventListeners();
 
 //попап добавления карточек
@@ -52,34 +52,27 @@ const createCard = (item) => {
 }
 
 // добавление карточек
-const renderCard = new Section({
+const cardsSection = new Section({
     items: initialCards,
     renderer: (items) => {
         items.reverse().forEach(item => {
             const cardElement = createCard(item);
-            return renderCard.addItem(cardElement);
+            cardsSection.addItem(cardElement);
         })
     }
 }, '.elements');
-renderCard.getElement();
+cardsSection.render();
 
 function submitHandlerCard(values) {
-    const renderCard = new Section({
-        items: values,
-        renderer: (items) => {
-            const cardElement = createCard(items);
-            return renderCard.addItem(cardElement);
-        }
-    }, '.elements');
-    return renderCard.getElement();
+    cardsSection.addItem(createCard(values));
 }
 
 // открытие попапа профиля
 openEditProfilePopupBtn.addEventListener('click', () => {
-    valueName.value = userInfo.getUserInfo().name;
-    valueJob.value = userInfo.getUserInfo().info;
+    const userValues = userInfo.getUserInfo();
+    valueName.value = userValues.name;
+    valueJob.value = userValues.info;
     popupEdit.open();
-    formElementProfile.reset();
     editFormValidator.resetFormState();
 });
 
