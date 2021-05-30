@@ -1,24 +1,38 @@
 export default class Card {
-    constructor(data, cardSelector, handleCardClick) {
+    constructor(data, cardSelector, handleCardClick, currentUserId) {
         this.card = data;
         this._cardSelector = cardSelector;
         this._handleCardClick = handleCardClick;
         this.cardElement = this.createCard();
         this.deleteButton = this.cardElement.querySelector('.elements__remove-button');
         this.like = this.cardElement.querySelector('.elements__like-button');
+        this.userId = currentUserId;
+        this._ownerId = this.card.owner._id;
         this.getEventListeners();
+        this.removeDeleteButton();
     }
 
     createCard() {
         const cardTemplate = document.querySelector(this._cardSelector).content;
         const cardTemplateClone = cardTemplate.cloneNode(true);
         const cardElement = cardTemplateClone.querySelector('.elements__card');
+        const totalLike = cardElement.querySelector('.elements__total-like');
         this.cardElementName = cardElement.querySelector('.elements__title');
         this.cardElementImage = cardElement.querySelector('.elements__image');
+
+        totalLike.textContent = this.card.likes.length;
         this.cardElementImage.src = this.card.link;
         this.cardElementImage.alt = this.card.name;
         this.cardElementName.textContent = this.card.name;
+
         return cardElement;
+
+    }
+
+    removeDeleteButton () {
+      if (this._ownerId !== this.userId) {
+        this.deleteButton.remove();
+      }
     }
 
     getEventListeners() {
@@ -40,6 +54,7 @@ export default class Card {
     }
 
     renderCard() {
-        return this.cardElement;
+      return this.cardElement;
+
     }
 }

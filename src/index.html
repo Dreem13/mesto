@@ -51,11 +51,30 @@
             </form>
         </div>
     </div>
+
+    <div class="popup popup_type_avatar">
+        <div class="popup__overlay"></div>
+        <div class="popup__container">
+            <button class="popup__close popup__close_avatar" type="button" title="Закрыть окно" aria-label="Закрыть форму"></button>
+        <form class="popup__form popup__form-avatar" name="avatar">
+            <fieldset class="popup__field">
+            <legend class="popup__header">Обновить аватар</legend>
+            <div class="popup__input-container">
+                <input class="popup__input popup__input_card_caption" type="url" placeholder="Ссылка на картинку" name="link" required id="url-input">
+                <span class="error" id="url-input--error"></span>
+            </div>
+            <button class="popup__btn" type="submit" aria-label="Кнопка сохранить">Сохранить</button>
+            </fieldset>
+        </form>
+        </div>
+    </div>
+
+
     <div class="popup popup_type_cards">
         <div class="popup__overlay"></div>
         <div class="popup__container">
             <button class="popup__close popup__close_cards" type="button" title="Закрыть окно" aria-label="Закрыть форму"></button>
-            <form action="action" class="popup__form popup__form-cards" name="card" autocomplete="off">
+            <form action="action" class="popup__form popup__form-cards" name="card">
                 <fieldset class="popup__field">
                     <legend class="popup__header">Новое место</legend>
                     <div class="popup__input-container">
@@ -81,12 +100,29 @@
             <button type="button" class="popup__close popup__close_image"></button>
         </div>
     </div>
+
+    <div class="popup popup_type_delete">
+        <div class="popup__overlay"></div>
+        <div class="popup__container">
+            <button class="popup__close popup__close_delete" type="button" title="Закрыть окно" aria-label="Закрыть форму"></button>
+        <form class="popup__form popup__form-delete" name="avatar">
+            <fieldset class="popup__field">
+            <legend class="popup__header">Вы уверены?</legend>
+                <button class="popup__btn" type="submit" aria-label="Кнопка сохранить">Да</button>
+            </fieldset>
+        </form>
+        </div>
+    </div>
+
     <template id="card-template">
       <div class="elements__card">
         <img class="elements__image" src="#" alt="#">
         <div class="elements__title-wrapper">
           <h2 class="elements__title"></h2>
+          <div class="elements__like">
           <button type="button" class="elements__like-button"></button>
+          <span class="elements__total-like">0</span>
+          </div>
         </div>
         <button class="elements__remove-button"></button>
       </div>
