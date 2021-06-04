@@ -83,6 +83,79 @@ setNewCard ({name, link}) {
       })
 }
 
+updateAvatar(avatar) {
+  return fetch(`${this._url}/users/me/avatar`, {
+    method: 'PATCH',
+    headers: {
+      authorization: this._token,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ avatar: avatar })
+  })
+  .then((result) => {
+    if (result.ok) {
+      return result.json();
+    } else {
+      return Promise.reject(`Ошибка: ${result.status}`)
+    }
+  })
+}
+
+deleteCard (cardId) {
+  return fetch(`${this._url}/cards/${cardId}`, {
+    method: 'DELETE',
+    headers: {
+      authorization: this._token,
+      'Content-Type': 'application/json'
+    },
+    })
+  .then((result) => {
+    if (result.ok) {
+      return result.json();
+    } else {
+      return Promise.reject(`Ошибка: ${result.status}`)
+    }
+  })
+}
+
+addLike (cardId) {
+  return fetch(`${this._url}/cards/likes/${cardId}`, {
+    method: 'PUT',
+    headers: {
+      authorization: this._token,
+      'Content-Type': 'application/json'
+    },
+    })
+  .then((result) => {
+    if (result.ok) {
+      return result.json();
+    } else {
+      return Promise.reject(`Ошибка: ${result.status}`)
+    }
+  })
+}
+
+removeLike (cardId) {
+  return fetch(`${this._url}/cards/likes/${cardId}`, {
+    method: 'DELETE',
+    headers: {
+      authorization: this._token,
+      'Content-Type': 'application/json'
+    },
+    })
+  .then((result) => {
+    if (result.ok) {
+      return result.json();
+    } else {
+      return Promise.reject(`Ошибка: ${result.status}`)
+    }
+  })
+}
+
+like (cardId, isLiked) {
+  return isLiked ? this.removeLike(cardId) : this.addLike(cardId);
+}
+
 }
 
 

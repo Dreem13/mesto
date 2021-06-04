@@ -7,12 +7,19 @@ const formElementProfile = document.querySelector('.popup__form-profile');
 const cardsContainer = document.querySelector('.elements'); // Контейнер для карточек
 const modalWindowEdit = document.querySelector('.popup_type_edit');
 const modalWindowCards = document.querySelector('.popup_type_cards');
+const popupAvatar = document.querySelector('.popup_type_avatar');
 const formAddCard = document.querySelector('.popup__form-cards');
 const modalWindowImage = document.querySelector('.popup_type_image');
 const openModalAddCardsButton = document.querySelector('.profile__button');
 const inputName = document.querySelector('.popup__input_card_name');
 const inputCaption = document.querySelector('.popup__input_card_caption');
-
+const avatarInput = document.querySelector('.popup__input_title_avatar');
+const formAvatarElement = document.querySelector('.popup__form-avatar');
+const avatarButton = document.querySelector('.profile__avatar-button');
+const profileAvatar = document.querySelector('.profile__info-img');
+const popupDelete = document.querySelector('.popup_type_delete');
+const popupDeleteButton = document.querySelector('.elements__remove-button');
+const popupDeleteForm = document.querySelector('.popup__form-delete');
 const initialCards = [{
         name: 'Архыз',
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -65,4 +72,12 @@ export {
     formElementProfile,
     formAddCard,
     params,
+    popupAvatar,
+    avatarInput,
+    formAvatarElement,
+    avatarButton,
+    profileAvatar,
+    popupDelete,
+    popupDeleteButton,
+    popupDeleteForm,
 }

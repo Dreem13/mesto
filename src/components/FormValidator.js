@@ -48,7 +48,7 @@
         }
 
         // Скрыть ошибки при повторном открытии попапа и деактивация кнопки
-        resetFormState(inputs, button) {
+        resetFormState (inputs, button) {
             const inputList = Array.from(this._formElement.querySelectorAll(this._params.inputSelector));
             inputList.forEach(input => {
                 this._hideInputError(input);
@@ -59,14 +59,14 @@
         }
 
         // Ищем невалидные поля
-        _hasInvalidInput(inputs) {
+        _hasInvalidInput (inputs) {
             return inputs.some((input) => {
                 return !input.validity.valid;
             });
         }
 
         // Неактивная кнопка
-        _toggleButtonState(inputs, button) {
+        _toggleButtonState (inputs, button) {
             if (this._hasInvalidInput(inputs)) {
                 button.classList.add(this._params.inactiveButtonClass);
                 button.disabled = true;
