@@ -4,6 +4,14 @@ export default class Api {
 		this._token = token;
 	}
 
+_checkStatus (result) {
+  if (result.ok) {
+    return result.json();
+  } else {
+    return Promise.reject(`Ошибка: ${result.status}`)
+  }
+}
+
 getUserInfo () {
 	return fetch(`${this._url}/users/me`, {
     method: 'GET',
@@ -12,11 +20,7 @@ getUserInfo () {
       }
     })
       .then((result) => {
-      if (result.ok) {
-          return result.json();
-        } else {
-          return Promise.reject(`Ошибка: ${result.status}`)
-        }
+      return this._checkStatus(result);
       })
 }
 
@@ -32,11 +36,7 @@ setUserInfo ({name, about}) {
       })
     })
       .then((result) => {
-        if (result.ok) {
-          return result.json();
-        } else {
-          return Promise.reject(`Ошибка: ${result.status}`)
-        }
+        return this._checkStatus(result);
       })
 }
 
@@ -47,19 +47,8 @@ getCards () {
       }
     })
       .then((result) => {
-        if (result.ok) {
-          return result.json();
-        } else {
-          return Promise.reject(`Ошибка: ${result.status}`)
-        }
+        return this._checkStatus(result);
       })
-      .then(
-        data =>
-          data.map(e => {
-            e.isMine = e.owner._id === "a4f1ef1e0fd3a856de639ea5";
-            return e;
-          })
-      )
 }
 
 setNewCard ({name, link}) {
@@ -75,11 +64,7 @@ setNewCard ({name, link}) {
       })
     })
       .then((result) => {
-        if (result.ok) {
-          return result.json();
-        } else {
-          return Promise.reject(`Ошибка: ${result.status}`)
-        }
+        return this._checkStatus(result);
       })
 }
 
@@ -93,11 +78,7 @@ updateAvatar(avatar) {
     body: JSON.stringify({ avatar: avatar })
   })
   .then((result) => {
-    if (result.ok) {
-      return result.json();
-    } else {
-      return Promise.reject(`Ошибка: ${result.status}`)
-    }
+    return this._checkStatus(result);
   })
 }
 
@@ -110,11 +91,7 @@ deleteCard (cardId) {
     },
     })
   .then((result) => {
-    if (result.ok) {
-      return result.json();
-    } else {
-      return Promise.reject(`Ошибка: ${result.status}`)
-    }
+    return this._checkStatus(result);
   })
 }
 
@@ -127,11 +104,7 @@ addLike (cardId) {
     },
     })
   .then((result) => {
-    if (result.ok) {
-      return result.json();
-    } else {
-      return Promise.reject(`Ошибка: ${result.status}`)
-    }
+    return this._checkStatus(result);
   })
 }
 
@@ -144,11 +117,7 @@ removeLike (cardId) {
     },
     })
   .then((result) => {
-    if (result.ok) {
-      return result.json();
-    } else {
-      return Promise.reject(`Ошибка: ${result.status}`)
-    }
+    return this._checkStatus(result);
   })
 }
 

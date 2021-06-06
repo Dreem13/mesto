@@ -38,6 +38,14 @@ url: 'https://mesto.nomoreparties.co/v1/cohort-24',
 token: '8c6e6a0b-c97b-41fa-9ce9-e79b26e708e8'
 });
 
+// добавление изначальных карточек
+const cardsSection = new Section({
+  renderer: (items) => {
+          const cardElement = createCard(items);
+          cardsSection.addItem(cardElement);
+  }
+}, '.elements');
+
 Promise.all([api.getUserInfo(), api.getCards()])
 .then(
   ([userData, userCard]) => {
@@ -47,30 +55,15 @@ Promise.all([api.getUserInfo(), api.getCards()])
       about: userData.about,
       avatar: userData.avatar
   })
-  const cardsSections = new Section({
-    items: userCard,
-    renderer: (items) => {
-            const cardElement = createCard(items);
-            cardsSections.addItem(cardElement);
-    }
-  }, '.elements');
-  cardsSections.render();
+  cardsSection.render(userCard);
+})
+.catch((error) => {
+  console.log(error)
 })
 
 // создание карточки
 const createCard = (item) => {
-  const card = new Card(item, '#card-template', handleCardClick, currentUserId, submitCardDelete, likeCard,
-            () => {
-            (item.isLiked ?
-                api.removeLike(item._id) :
-                api.addLike(item._id))
-            .then(res => {
-                // card.toggleLike();
-                // card.renewLikes(res.likes.length);
-                item.isLiked = !item.isLiked;
-            });
-        }
-    );
+  const card = new Card(item, '#card-template', handleCardClick, currentUserId, submitCardDelete, likeCard);
   return card.renderCard();
 }
 
@@ -80,17 +73,10 @@ function likeCard (card, likes) {
   .then(res => {
     card.updateLikesInfo(res.likes);
   })
+  .catch((error) => {
+    console.log(error)
+  })
 }
-
-// добавление карточек
-const cardsSection = new Section({
-  items: [],
-  renderer: (items) => {
-          const cardElement = createCard(items);
-          cardsSection.addItem(cardElement);
-  }
-}, '.elements');
-cardsSection.render();
 
 //получение инпутов
 const userInfo = new UserInfo({ name: '.profile__title', about: '.profile__subtitle', avatar: '.profile__info-img'});
@@ -107,8 +93,8 @@ function handleAvatarFormSubmit(inputData) {
       userInfo.setUserAvatar(result.avatar);
       popupAvatarForm.close();
     })
-    .catch((err) => {
-      console.log(err);
+    .catch((error) => {
+      console.log(error)
     })
 }
 
@@ -133,9 +119,12 @@ deleteCardConfirm.setEventListeners();
 function deleteCardSubmit (data) {
   return api.deleteCard(data.cardId)
   .then(() => {
-    data._deleteCard();
+    data.deleteCard();
     deleteCardConfirm.close();
-  });
+  })
+  .catch((error) => {
+    console.log(error)
+  })
 }
 
 // попап профиля
@@ -148,10 +137,11 @@ function editFormSubmitHandler (dataFormPoup){
     about: dataFormPoup.userjob
   }
   ).then((dataFormServer) =>{
-    userInfo.setUserInfo(dataFormServer)
+    userInfo.setUserInfo(dataFormServer);
+    this.close();
   })
-  .catch(() => {
-    console.log('error')
+  .catch((error) => {
+    console.log(error)
   })
 }
 
@@ -174,7 +164,11 @@ function submitHandlerCard(values) {
           link:values.link
         }
         ).then((data) =>{
-          cardsSection.addItem(createCard(data))
+          cardsSection.addItem(createCard(data));
+          this.close();
+        })
+        .catch((error) => {
+          console.log(error)
         })
         .finally(() => {
           popupAdd.showTextSave(false);
